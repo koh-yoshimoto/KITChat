@@ -81,10 +81,45 @@ class MessageRepository implements BaseRepositoryInterface
         }
         return $messages->get();
     }
-    private function get_list_messages_with_tags(){
-        $messages_with_tags = DB::table("message_x__tags")->distinct()
-                                ->select("message_id")->get();
+
+    private function get_list_messages_with_tags($user_tags){
+        // 1) Create subquery
+        $subquery = Message::join("message_x__tags", "messages.id", "=", "message_x__tags.message_id")
+                        ->join("tags", "tags.id", "=", "message_x__tags.tag_id")
+                        ->selectRaw("messages.id, GROUP_CONCAT(tags.id) as tags")
+                        ->groupBy("messages.id");
+
+        // 2) get the messages
+        $messages_with_tags = DB::table(DB::raw("({$subquery->toSql()}) as sub"))
+                    ->whereIn("tags", $user_tags)
+                    ->select("id")
+                    ->get();
+
         return $messages_with_tags;
+    }
+
+    private function get_user_messages($user_id, $only_id = FALSE){
+        $messages = Message::where("sender", $user_id);
+        
+        if($only_id){
+            $messages->select("id");
+        }
+        return $messages->get();
+    }
+
+    private function get_messages_by_id($ids){
+        $messages = Message::whereIn("id", $ids)
+                        ->orderBy("messages.created_at", "desc")
+                        ->get();
+        return $messages;
+    }
+
+    private function get_messages_by_tags($tags){
+        $messages = Message::join("message_x__tags", "messages.id", "=", "message_x__tags.message_id")
+                        ->whereIn("imessage_x__tags.tag_id", $tags)
+                        ->orderBy("messages.created_at", "desc")
+                        ->get();
+        return $messages;
     }
 
     private function get_user_timeline(){
@@ -98,33 +133,18 @@ class MessageRepository implements BaseRepositoryInterface
         //    2.1) get the tags of the current tag
         $user = Auth::user();
         $user_tags = $this->get_user_tags($user);
-
-        //    2.2) Create subquery
-        $subquery = Message::join("message_x__tags", "messages.id", "=", "message_x__tags.message_id")
-                        ->join("tags", "tags.id", "=", "message_x__tags.tag_id")
-                        ->selectRaw("messages.id, GROUP_CONCAT(tags.id) as tags")
-                        ->groupBy("messages.id");
-
-        //    2.3) get the messages
-        $messages_with_tags = DB::table(DB::raw("({$subquery->toSql()}) as sub"))
-                    ->whereIn("tags", $user_tags)
-                    ->select("id")
-                    ->get();
+        $messages_with_tags = $this->get_list_messages_with_tags($user_tags);
         $all_ids = $all_ids->union($messages_with_tags->pluck("id"));
 
-
         //3) Get the messages created by the user.
-        $my_messages = Message::where("sender", $user->id)
-                        ->select("id")
-                        ->get();
+        $my_messages = $this->get_user_messages($user->id, TRUE);
 
         $all_ids = $all_ids->union($my_messages->pluck("id"));
         $unique = $all_ids->unique();
         $all_ids = $unique->values()->all();
 
-        $all_messages = Message::whereIn("id", $all_ids)
-                        ->orderBy("messages.created_at", "desc")
-                        ->get();
+        // return the timeline
+        $all_messages = $this->get_messages_by_id($all_ids);
         return $all_messages;
     }
 
