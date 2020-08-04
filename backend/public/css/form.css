@@ -1,0 +1,38 @@
+.cp_iptxt {
+	position: relative;
+	width: 30.33%;
+	margin: 20px 3%;
+}
+.cp_iptxt input[type='text'] {
+	font: 18px/24px sans-serif;
+	box-sizing: border-box;
+	width: 400%;
+	padding: 0.1em;
+	padding-left: 35px;
+	letter-spacing: 1px;
+	border: 0;
+}
+.cp_iptxt input[type='text']:focus {
+	outline: none;
+}
+.cp_iptxt input[type='text']:focus::after {
+	outline: none;
+}
+.cp_iptxt i {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 9px 5px;
+	transition: 0.3s;
+	color: #aaaaaa;
+}
+.cp_iptxt::after {
+	display: block;
+	width: 400%;
+	height: 4px;
+	margin-top: -1px;
+	content: '';
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-color: #da3c41;
+}

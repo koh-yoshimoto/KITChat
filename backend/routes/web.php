@@ -20,14 +20,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/profile', 'Auth\ProfileController@ShowProfile');
 
 
 # Auth Middleware
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/friend', 'FriendController@index');
     Route::post('/friend/add', 'FriendController@store');
-    Route::post('/friend/delete', 'FriendController@delete');
-
+    Route::post('/friend/type', 'FriendController@type');
+    
+    Route::get('/profile', 'Auth\ProfileController@ShowProfile');
+    
     Route::get('/message', 'MessageController@index')->name('message.index');
     Route::post('/message', 'MessageController@store')->name('message.store');
     Route::post('/message', 'MessageController@postTweet');
