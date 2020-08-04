@@ -92,7 +92,7 @@ class MessageRepository implements BaseRepositoryInterface
         // 2) get the messages
         $messages_with_tags = DB::table(DB::raw("({$subquery->toSql()}) as sub"))
                     ->whereIn("tags", $user_tags)
-                    ->select("id")
+                    ->select("id", "tags")
                     ->get();
 
         return $messages_with_tags;
@@ -134,12 +134,21 @@ class MessageRepository implements BaseRepositoryInterface
         $user = Auth::user();
         $user_tags = $this->get_user_tags($user);
         $messages_with_tags = $this->get_list_messages_with_tags($user_tags);
-        $all_ids = $all_ids->union($messages_with_tags->pluck("id"));
+        $tag_messages = array();
+        // it is necessary to check that messages doenst have an extra tags
+        foreach ($messages_with_tags as $tmessage) {
+            $result = array_diff(explode(",", $tmessage->tags), $user_tags);
+            if(empty($result)){
+                
+                $tag_messages[] = $tmessage->id;
+            }
+        }
+        $all_ids = $all_ids->concat($tag_messages);
 
         //3) Get the messages created by the user.
         $my_messages = $this->get_user_messages($user->id, TRUE);
 
-        $all_ids = $all_ids->union($my_messages->pluck("id"));
+        $all_ids = $all_ids->concat($my_messages->pluck("id"));
         $unique = $all_ids->unique();
         $all_ids = $unique->values()->all();
 
