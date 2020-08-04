@@ -11,36 +11,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>プロフィール</title>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
-    <link rel = "style"
     </head>
     <body>
         <div class="wrapper">
 
         <div style="margin-top: 30px;">
-   
-        <table class="table table-striped">  
-        <tr>
-        <th>Student ID</th>
-        <td>{{ Auth::user()->id }}</td>
-        </tr>  
-        <tr>
-        <th>Name</th>
-        <td>{{ Auth::user()->name }}</td>
-        </tr>  
-        <tr>
-        <th>Academic year</th>
-        <td>{{ Auth::user()-> academic_year}}</td>
-        </tr>
-        <tr>
-        <th>Faculty</th>
-        <td>{{ Auth::user()->faculty }}</td>
-        </tr>
-        <tr>
-        <th>Department</th>
-        <td>{{ Auth::user()->department }}</td>
-        </tr>
-        </table>
+        <ul class="list-group">
+        <li class="list-group-item">{{Auth::user()->id}} </li>
+        <li class="list-group-item">{{ Auth::user()->name }}</li>
+        <li class="list-group-item">{{ Auth::user()-> academic_year}}</li>
+        <li class="list-group-item">{{ Auth::user()->faculty }}</li>
+        <li class="list-group-item">{{ Auth::user()->department }}</li>
+        </ul>
 
+        <a class="btn btn-primary" href="/timeline" role="button">TimeLine</a>
+        <a class="btn btn-primary" href="/friend" role="button">Friend</a>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
     </body>
