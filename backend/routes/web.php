@@ -13,13 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 //Route::get('/profile', 'Auth\ProfileController@ShowProfile');
 
 
@@ -29,7 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/friend/add', 'FriendController@store');
     Route::post('/friend/type', 'FriendController@type');
     
-    Route::get('/profile', 'Auth\ProfileController@ShowProfile');
+    Route::get('/profile', 'Auth\ProfileController@ShowProfile')->name('profile');
     
     Route::get('/message', 'MessageController@index')->name('message.index');
     Route::post('/message', 'MessageController@store')->name('message.store');
