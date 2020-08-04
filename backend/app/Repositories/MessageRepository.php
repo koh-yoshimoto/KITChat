@@ -85,8 +85,7 @@ class MessageRepository implements BaseRepositoryInterface
     private function get_list_messages_with_tags($user_tags){
         // 1) Create subquery
         $subquery = Message::join("message_x__tags", "messages.id", "=", "message_x__tags.message_id")
-                        ->join("tags", "tags.id", "=", "message_x__tags.tag_id")
-                        ->selectRaw("messages.id, GROUP_CONCAT(tags.id) as tags")
+                        ->selectRaw("messages.id, GROUP_CONCAT(message_x__tags.tag_id) as tags")
                         ->groupBy("messages.id");
 
         // 2) get the messages
@@ -169,7 +168,6 @@ class MessageRepository implements BaseRepositoryInterface
             "gender"         => ($user->gender == 1) ? "man" : "woman",
             "faculty"        => $user->faculty,
             "department"     => $user->department,
-            // club is not a tag?
         );
 
         // check for the tag_id in the Tags table
@@ -181,6 +179,9 @@ class MessageRepository implements BaseRepositoryInterface
                 }
             }
         }
+
+        // The club is not in the Tag table so we need to add it manually.
+        $tags[] = $user->club;
 
         return $tags;
     }
