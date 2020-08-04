@@ -24,7 +24,7 @@
         <li class="list-group-item">{{ Auth::user()->department }}</li>
         </ul>
 
-        <a class="btn btn-primary" href="/home" role="button">TimeLine</a>
+        <a class="btn btn-primary" href="/" role="button">TimeLine</a>
         <a class="btn btn-primary" href="/friend" role="button">Friend</a>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
