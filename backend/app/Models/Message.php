@@ -27,4 +27,12 @@ class Message extends Model
     {
         return $this->belongsTo('App\User', 'sender');
     }
+
+    /**
+     * Get the tags that belogngs to the message.
+     */
+    public function message_tags()
+    {
+        return $this->belongsToMany('App\Models\Tags', 'message_x__tags', 'message_id', 'tag_id');
+    }
 }
