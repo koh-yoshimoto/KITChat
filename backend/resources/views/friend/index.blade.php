@@ -1,39 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/button.css') }}">
+<link rel="stylesheet" href="{{ asset('css/form.css') }}">
+
 <div class="container">
     <div class="row justify-content-center">
 
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Friend List</div>
 
-                <div class="card-body">
-                    Friend List
-                                      
+                <div class="card-body"> 
                     @foreach($friends as $friend)
                         <li>{{$friend->name }} {{$friend->id}}
-
+                        <form method="POST" action="/friend/type" enctype="multipart/form-data" >
+                            {{ csrf_field() }}
+                            <button type="submit" name="mute" value="mute" class="btn btn--blue" >ミュート</button>
+                            <button type="submit" name="block" value="block" class="btn btn--blue" >ブロック</button>
+                            <button type="submit" name="free" value="free" class="btn btn--blue" >解除</button>
+                            <button type="submit" name="delete" value=<?=$friend->id?> class="btn btn--blue" >削除</button>
+                        </form>
                         </li>
                     @endforeach
-           
                 </div>
             </div>
         </div>
 
+        <div>
         <form method="POST" action="/friend/add" enctype="multipart/form-data" >
             {{ csrf_field() }}
-            <input type="text" name="friend_id">
-            <button type="submit" name=input > 登録</button>
+            <button type="submit" name=register class="btn btn--orange"> 登録</button>
+            <div class="cp_iptxt">
+                <input type="text" placeholder="登録ID" name="friend_id">
+                <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+            </div>
         </form>
         <form method="POST" action="/friend/delete" enctype="multipart/form-data" >
-             {{ csrf_field() }}
-            <input type="text" name="friend_id">
-            <button type="submit" name=output > 削除</button>
-            <!-- <button type="submit" name= $friend_name ?> value=< $friend->id ?> >削除</button> -->
+            {{ csrf_field() }}
+            <button type="submit" name=delete class="btn btn--blue"> 削除</button>
+            <div class="cp_iptxt">
+                <input type="text" placeholder="削除ID" name="friend_id">
+                <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+            </div>
+
+            </div>
         </form>
-
-
+        
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -43,8 +56,7 @@
             </ul>
         </div>
         @endif
-
-        
+        </div>
     </div>
 </div>
 @endsection
