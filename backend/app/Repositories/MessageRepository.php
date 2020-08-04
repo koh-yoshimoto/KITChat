@@ -9,12 +9,18 @@ class MessageRepository implements BaseRepositoryInterface
 {
     public function all()
     {
-        return Message::all();
+        return Message::all()->sortByDesc('created_at');
     }
 
     public function show($id)
     {
         return Message::find($id);
+    }
+
+    public function latest_message()
+    {
+        return Message::orderBy('id', 'desc')
+        ->first();
     }
 
     public function create(array $data)

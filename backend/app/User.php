@@ -36,4 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function friends()
+    {
+        return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id');
+    }
+
 }

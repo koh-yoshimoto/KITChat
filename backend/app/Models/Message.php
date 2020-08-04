@@ -23,7 +23,7 @@ class Message extends Model
     /**
      * Get the user that owns the message.
      */
-    public function sender()
+    public function author()
     {
         return $this->belongsTo('App\User', 'sender');
     }
