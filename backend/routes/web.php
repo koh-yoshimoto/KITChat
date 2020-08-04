@@ -21,3 +21,4 @@ Route::get('/message', 'MessageController@index')->name('index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'Auth\ProfileController@ShowProfile');
