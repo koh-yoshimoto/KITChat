@@ -576,207 +576,207 @@ class TagsTableSeeder extends Seeder
         ]);
         DB::table('tags')->insert([
             'name' => '情報創成工学専攻',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '情報創成工学専門分野',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '先端情報工学専攻',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '知能情報工学専門分野',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '電子情報工学専門分野',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '学際情報工学専攻',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => 'システム創成情報工学専門分野',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '生命情報工学専門分野',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '機械情報工学専門分野',
-            'type' => 'departmen4',
+            'type' => 'department4',
         ]);
         DB::table('tags')->insert([
             'name' => '全て対象',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '機械知能工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '知能制御工学コース',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '電気電子工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '電気エネルギーコース',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '先端機能システム工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '先端機能システム（国際）',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '機械知能工学領域',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '建設社会工学領域',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '電気電子工学領域',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '物質工学領域',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '先端機能システム工学領域',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '機械知能工学領域（国際）',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '建設社会工学領域（国際）',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '電気電子工学領域（国際）',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '先端機能システム工学領域（国際）',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '工学専攻',
-            'type' => 'departmen5',
+            'type' => 'department5',
         ]);
         DB::table('tags')->insert([
             'name' => '全て対象',
-            'type' => 'departmen6',
+            'type' => 'department6',
         ]);
         DB::table('tags')->insert([
             'name' => '情報工学専攻',
-            'type' => 'departmen6',
+            'type' => 'department6',
         ]);
         DB::table('tags')->insert([
             'name' => '知能情報工学専門分野',
-            'type' => 'departmen6',
+            'type' => 'department6',
         ]);
         DB::table('tags')->insert([
             'name' => '全て対象',
-            'type' => 'departmen7',
+            'type' => 'department7',
         ]);
         DB::table('tags')->insert([
             'name' => '生体機能応用工学専攻',
-            'type' => 'departmen7',
+            'type' => 'department7',
         ]);
         DB::table('tags')->insert([
             'name' => '共通コース',
-            'type' => 'departmen7',
+            'type' => 'department7',
         ]);
         DB::table('tags')->insert([
             'name' => '人間知能システム工学専攻',
-            'type' => 'departmen7',
+            'type' => 'department7',
         ]);
         DB::table('tags')->insert([
             'name' => '共通コース',
-            'type' => 'departmen7',
+            'type' => 'department7',
         ]);
         DB::table('tags')->insert([
             'name' => '全て対象',
-            'type' => 'departmen8',
+            'type' => 'department8',
         ]);
         DB::table('tags')->insert([
             'name' => '生体機能専攻',
-            'type' => 'departmen8',
+            'type' => 'department8',
         ]);
         DB::table('tags')->insert([
             'name' => '共通コース',
-            'type' => 'departmen8',
+            'type' => 'department8',
         ]);
         DB::table('tags')->insert([
             'name' => '脳情報専攻',
-            'type' => 'departmen8',
+            'type' => 'department8',
         ]);
         DB::table('tags')->insert([
             'name' => '共通コース',
-            'type' => 'departmen8',
+            'type' => 'department8',
         ]);
         DB::table('tags')->insert([
             'name' => '生命体工学専攻',
-            'type' => 'departmen8',
+            'type' => 'department8',
         ]);
         DB::table('tags')->insert([
             'name' => '共通コース',
-            'type' => 'departmen8',
+            'type' => 'department8',
         ]);
     }
 }
