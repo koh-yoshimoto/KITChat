@@ -62,9 +62,6 @@
                                         <label for="department">Department</label>
                                         <select class="form-control" id="department" name="department">
                                             <option value="0">No select</option>
-                                            @foreach($department1s as $department1)
-                                                <option value={{$department1->id}}>{{$department1->name}}</option>
-                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
