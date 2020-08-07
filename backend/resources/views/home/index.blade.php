@@ -73,29 +73,9 @@
                                         <label for="club">Club</label>
                                         <select class="form-control" id="club" name="club">
                                             <option value="0">No select</option>
-                                            <option value="201">合気道部</option>
-                                            <option value="202">アイスホッケー部</option>
-                                            <option value="203">アメリカンフットボール部</option>
-                                            <option value="204">空手道部</option>
-                                            <option value="205">弓道部</option>
-                                            <option value="206">剣道部</option>
-                                            <option value="207">航空部</option>
-                                            <option value="208">硬式庭球部</option>
-                                            <option value="209">硬式野球部</option>
-                                            <option value="210">準硬式野球部</option>
-                                            <option value="211">軟式野球部</option>
-                                            <option value="212">サイクリング部</option>
-                                            <option value="213">サッカー部</option>
-                                            <option value="214">山岳部</option>
-                                            <option value="215">自動車部</option>
-                                            <option value="216">柔道部</option>
-                                            <option value="217">少林寺拳法部</option>
-                                            <option value="218">水泳部</option>
-                                            <option value="219">漕艇部</option>
-                                            <option value="220">ソフトテニス部</option>
-                                            <option value="221">卓球部</option>
-                                            <option value="222">トライアスロン部</option>
-                                            <option value="223">バドミントン部</option>
+                                                @foreach($clubs as $club)
+                                                    <option value={{$club->id}}>{{$club->name}}</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -112,4 +92,39 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    // use var j to avoid conflict with other libraries
+    var j = jQuery.noConflict();
+    j(function() {
+        j('select[name=faculty]').change(function() {
+            // get the selected values
+            var faculty_name = j(this).children("option:selected").text();
+            // create the url to API
+            var url = "{{ url('/message/tag/') }}";
+
+            j.ajax({
+                method: "POST",
+                url: url,
+                data: {
+                    'faculty': faculty_name,
+                    '_token': '{{ csrf_token() }}',
+                }
+                }).done(function( msg, textStatus, jqXHR ) {
+                if(jqXHR.status == 200){
+                    var select = j('form select[name=department]');
+                    select.empty();
+                    select.append('<option value="0">No select</option>')
+                    j.each(msg.departments,function(key, value) {
+                        select.append('<option value=' + value.id + '>' + value.name + '</option>');
+                    });
+                }else{
+                    // error 
+                    console.log(msg);
+                }
+            });           
+        });
+    });
+</script>
 @endsection

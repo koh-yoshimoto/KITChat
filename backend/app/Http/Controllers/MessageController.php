@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\MessageRepository;
 use App\Repositories\TagsRepository;
+use App\Repositories\ClubRepository;
 use App\Repositories\Message_x_TagsRepository;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,15 @@ class MessageController extends Controller
      * @param  MessageRepository  $messageRepository
      * @return void
      */
-    public function __construct(MessageRepository $messageRepository, TagsRepository $tagsRepository, Message_x_TagsRepository $message_x_tagsRepository)
+    public function __construct(
+                MessageRepository $messageRepository, 
+                TagsRepository $tagsRepository, 
+                Message_x_TagsRepository $message_x_tagsRepository, 
+                ClubRepository $clubRepository
+            )
     {
         $this->repo = $messageRepository;
+        $this->club = $clubRepository;
         $this->tags = $tagsRepository;
         $this->m_x_t = $message_x_tagsRepository;
     }
@@ -42,9 +49,11 @@ class MessageController extends Controller
         $facultys = $this->tags->where('type', 'faculty');
         // Get all the tags that is department1
         $department1s = $this->tags->where('type', 'department1');
+        // Get all the tags that are clubs
+        $clubs = $this->tags->where('type', 'club');
 
         // Load the view and pass the question types
-        return view('home.index', compact('messages', 'academiac_years', 'genders', 'ages', 'facultys', 'department1s'));
+        return view('home.index', compact('messages', 'academiac_years', 'genders', 'ages', 'facultys', 'department1s', 'clubs'));
     }
 
     public function postTweet(Request $request)
@@ -101,5 +110,45 @@ class MessageController extends Controller
         $tags = config('kitchat_tags.clubs');
 
         return redirect('/home')->with(['tags' => $tags, 'messages' => $messages]);
+    }
+
+    public function tags_department(Request $request){
+        $faculty = $request->get('faculty');
+        $department = '';
+
+        switch ($faculty) {
+            case '工学部':
+                $department = "department1";
+                break;
+            case '情報工学部':
+                $department = "department2";
+                break;
+            case '工学府博士前期課程':
+                $department = "department3";
+                break;
+            case '大学院情報工学府博士前期課程':
+                $department = "department4";
+                break;
+            case '工学府博士後期課程':
+                $department = "department5";
+                break;
+            case '大学院情報工学府博士後期課程':
+                $department = "department6";
+                break;
+            case '生命体工学研究科博士前期課程':
+                $department = "department7";
+                break;
+            case '生命体工学研究科博士後期課程':
+                $department = "department8";
+                break;
+            default:
+                break;
+        }
+
+        $departments = $this->tags->where('type', $department);
+
+        return response()->json([
+            'departments' => $departments
+        ]);
     }
 }

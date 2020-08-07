@@ -30,4 +30,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/message', 'MessageController@index')->name('message.index');
     Route::post('/message', 'MessageController@store')->name('message.store');
     Route::post('/message', 'MessageController@postTweet');
+    Route::post('/message/tag', 'MessageController@tags_department')->name('tags_department');
 });
