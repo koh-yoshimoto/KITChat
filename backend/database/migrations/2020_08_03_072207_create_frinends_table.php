@@ -17,6 +17,7 @@ class CreateFrinendsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('friend_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->unique(['user_id', 'friend_id'],'unique_user_x_friend');
             $table->string('type', 10)->nullable();
             $table->timestamps();
         });

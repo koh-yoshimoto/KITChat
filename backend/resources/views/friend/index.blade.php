@@ -11,14 +11,14 @@
             <div class="card">
                 <div class="card-header">Friend List</div>
 
-                <div class="card-body"> 
+                <div class="card-body">
                     @foreach($friends as $friend)
                         <li>{{$friend->name }} {{$friend->id}}
                         <form method="POST" action="/friend/type" enctype="multipart/form-data" >
                             {{ csrf_field() }}
-                            <button type="submit" name="mute" value="mute" class="btn btn--blue" >ミュート</button>
-                            <button type="submit" name="block" value="block" class="btn btn--blue" >ブロック</button>
-                            <button type="submit" name="free" value="free" class="btn btn--blue" >解除</button>
+                            <button type="submit" name="mute" value=<?=$friend->id?> class="btn btn--blue" >ミュート</button>
+                            <button type="submit" name="block" value=<?=$friend->id?>  class="btn btn--blue" >ブロック</button>
+                            <button type="submit" name="free" value=<?=$friend->id?>  class="btn btn--blue" >解除</button>
                             <button type="submit" name="delete" value=<?=$friend->id?> class="btn btn--blue" >削除</button>
                         </form>
                         </li>
@@ -46,7 +46,7 @@
 
             </div>
         </form>
-        
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

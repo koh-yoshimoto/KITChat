@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Request;
 use App\Http\Requests\FriendRequest;
 use App\User;
+use Exception;
 
 class FriendController extends Controller
 {
@@ -17,12 +18,30 @@ class FriendController extends Controller
 
   public function store(FriendRequest $request)
   {
-      
+
       $user = \Auth::User();
-      $user->friends()->attach($request->friend_id, ['type' => 'frined']);
+      try {
+          if ($user->where('id', $request->friend_id)->exists()) {
+              $user->friends()->attach($request->friend_id, ['type' => 'frined']);
+          } else {
+              return redirect('friend')->with('error', '存在しないIDです');
+          }
+      }catch (Exception $e) {
+          return redirect('friend')->with('error', 'すでに登録されています');
+      }
 
       return redirect('friend')->with('success', '新しい友達を登録しました');
-      
+
+  }
+
+  public function delete(FriendRequest $request)
+  {
+
+      $user = \Auth::User();
+      $user->friends()->detach($request->friend_id);
+
+      return redirect('friend')->with('success', '友達を削除しました');
+
   }
 
   public function type()
@@ -34,13 +53,16 @@ class FriendController extends Controller
         $user->friends()->detach($friend_id);
         return redirect('friend')->with('success', '友達を削除しました');
     }elseif (Request::has('mute')) {
-        $user->friends()->update(['type' => 'mute']);
+        $friend_id = Request::input('mute');
+        $user->friends()->where('friend_id', $friend_id)->update(['type' => 'mute']);
         return redirect('friend')->with('success', '友達をミュートしました');
     }elseif (Request::has('block')) {
-        $user->friends()->update(['type' => 'block']);
+        $friend_id = Request::input('block');
+        $user->friends()->where('friend_id', $friend_id)->update(['type' => 'block']);
         return redirect('friend')->with('success', '友達をブロックしました');
     }elseif (Request::has('free')) {
-        $user->friends()->update(['type' => 'friend']);
+        $friend_id = Request::input('free');
+        $user->friends()->where('friend_id', $friend_id)->update(['type' => 'friend']);
         return redirect('friend')->with('success', 'ミュート/ブロックを解除しました');
     }
   }
