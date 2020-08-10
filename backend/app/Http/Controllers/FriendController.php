@@ -21,13 +21,13 @@ class FriendController extends Controller
 
       $user = \Auth::User();
       try {
-        if ($user->where('id', $request->friend_id)->exists()) {
-          $user->friends()->attach($request->friend_id, ['type' => 'frined']);
-        } else {
-          return redirect('friend')->with('error', '存在しないIDです');
-        }
+          if ($user->where('id', $request->friend_id)->exists()) {
+              $user->friends()->attach($request->friend_id, ['type' => 'frined']);
+          } else {
+              return redirect('friend')->with('error', '存在しないIDです');
+          }
       }catch (Exception $e) {
-        return redirect('friend')->with('error', 'すでに登録されています');
+          return redirect('friend')->with('error', 'すでに登録されています');
       }
 
       return redirect('friend')->with('success', '新しい友達を登録しました');
@@ -57,7 +57,7 @@ class FriendController extends Controller
         $user->friends()->where('friend_id', $friend_id)->update(['type' => 'mute']);
         return redirect('friend')->with('success', '友達をミュートしました');
     }elseif (Request::has('block')) {
-      $friend_id = Request::input('block');
+        $friend_id = Request::input('block');
         $user->friends()->where('friend_id', $friend_id)->update(['type' => 'block']);
         return redirect('friend')->with('success', '友達をブロックしました');
     }elseif (Request::has('free')) {
