@@ -21,7 +21,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 # Auth Middleware
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/friend', 'FriendController@index');
+    Route::get('/friend', 'FriendController@index')->name('friend');
     Route::post('/friend/add', 'FriendController@store');
     Route::post('/friend/delete', 'FriendController@delete');
     Route::post('/friend/type', 'FriendController@type');
