@@ -32,6 +32,12 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]
         ];
+        
+        // 登録
+        foreach($users as $user) {
+            \App\User::create($user);
+        }
+
         factory(App\User::class, 10)->create();
 
         foreach (App\User::All() as $user){
@@ -44,11 +50,6 @@ class UserSeeder extends Seeder
             $user->friends()->attach(
                 $random_friends_id
             );
-        }
-
-        // 登録
-        foreach($users as $user) {
-            \App\User::create($user);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
